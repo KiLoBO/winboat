@@ -4,15 +4,20 @@
         'config:recommended',
         ':disableRateLimiting',
     ],
-    "includePaths": ["**/src/renderer/lib/**"],
-    "regexManagers": [
+    includePaths: [
+        '**/src/renderer/lib/**',
+    ],
+    customManagers: [
         {
-            "fileMatch": ["src/renderer/lib/install\\.ts$"],
-            "matchStrings": [
-                "\"image\":\\s*\"(?<depName>ghcr\\.io/dockur/windows):(?<currentValue>[^\"]+)\""
+            customType: 'regex',
+            managerFilePatterns: [
+                '/src/renderer/lib/install\\.ts$/',
             ],
-            "datasourceTemplate": "docker",
-            "depTypeTemplate": "container"
-        }
-    ]
+            matchStrings: [
+                '"image":\\s*"(?<depName>ghcr\\.io/dockur/windows):(?<currentValue>[^"]+)"',
+            ],
+            datasourceTemplate: 'docker',
+            depTypeTemplate: 'container',
+        },
+    ],
 }
